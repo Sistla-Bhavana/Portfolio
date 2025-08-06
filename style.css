@@ -1,4 +1,4 @@
-/* Reset some defaults */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
 }
 
 html {
-  scroll-behavior: smooth; /* smooth scroll */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -19,41 +19,105 @@ body {
   flex-direction: column;
 }
 
-header {
-  background: #1f1f1f;
-  padding: 1rem 0;
-  position: sticky;
+/* Navbar */
+.navbar {
+  position: fixed;
   top: 0;
-  z-index: 100;
+  width: 100%;
+  background: rgba(31, 31, 31, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center nav links horizontally */
+  padding: 0.8rem 1.5rem;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-nav ul {
+/* Remove nav-brand styles since brand is removed */
+
+/* Nav menu */
+.nav-menu {
   list-style: none;
   display: flex;
-  justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
-nav ul li a {
+.nav-menu li a {
   color: #eee;
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
-  transition: color 0.3s ease;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-nav ul li a:hover {
-  color: #4caf50;
+.nav-menu li a:hover,
+.nav-menu li a:focus {
+  background-color: #4caf50;
+  color: #121212;
 }
 
+/* Hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  border: none;
+  background: none;
+  position: absolute;
+  right: 1.5rem;
+}
+
+.nav-toggle .hamburger,
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+  width: 25px;
+  height: 3px;
+  background-color: #eee;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle .hamburger::before {
+  top: -8px;
+}
+
+.nav-toggle .hamburger::after {
+  top: 8px;
+}
+
+/* Show nav-menu on toggle */
+.nav-menu_visible {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(31,31,31,0.95);
+  width: 200px;
+  border-radius: 0 0 8px 8px;
+  padding: 1rem 1rem;
+}
+
+/* Hero */
 .hero {
   text-align: center;
-  padding: 4rem 1rem 3rem;
+  padding: 7rem 1rem 3rem; /* add top padding for fixed navbar */
   background: linear-gradient(135deg, #3b82f6, #4caf50);
   color: white;
 }
 
-/* Fade-in animation for hero */
+/* Fade-in */
 .fade-in-bottom {
   opacity: 0;
   transform: translateY(30px);
@@ -158,18 +222,19 @@ footer {
   color: #888;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2.2rem;
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: none; /* hide hamburger */
   }
-
-  nav ul {
-    flex-direction: column;
+  .nav-menu {
+    display: flex !important;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
     gap: 1rem;
   }
-
-  .skills-list {
-    justify-content: center;
+  .nav-menu li {
+    flex: 0 0 auto; /* don’t shrink */
   }
 }
+
