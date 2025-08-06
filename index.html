@@ -10,9 +10,6 @@
 <body>
   <header>
     <nav class="navbar">
-      <button class="nav-toggle" aria-label="toggle menu">
-        <span class="hamburger"></span>
-      </button>
       <ul class="nav-menu">
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -66,8 +63,8 @@
     <h2>Contact</h2>
     <ul class="contact-list">
       <li>Email: <a href="mailto:bhavana2k5sistla@gmail.com">bhavana2k5sistla@gmail.com</a></li>
-      <li>GitHub: <a href="https://github.com/Sistla-Bhavana" target="_blank" rel="noopener">github.com/Sistla-Bhavana</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/bhavana-sistla-80a37426a" target="_blank" rel="noopener">linkedin.com/in/bhavana-sistla-80a37426a</a></li>
+      <li>GitHub: <a href="https://github.com/Sistla-Bhavana" target="_blank">github.com/Sistla-Bhavana</a></li>
+      <li>LinkedIn: <a href="https://www.linkedin.com/in/bhavana-sistla-80a37426a" target="_blank">linkedin.com/in/bhavana-sistla-80a37426a</a></li>
     </ul>
   </section>
 
@@ -76,30 +73,20 @@
   </footer>
 
   <script>
-    // Fade-in on scroll
+    // Fade-in animation
     document.addEventListener("DOMContentLoaded", function() {
       const faders = document.querySelectorAll(".fade-in-bottom");
-      const appearOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-      };
-      const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+      const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+
+      const appearOnScroll = new IntersectionObserver(function(entries, observer) {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
           entry.target.classList.add("visible");
-          appearOnScroll.unobserve(entry.target);
+          observer.unobserve(entry.target);
         });
       }, appearOptions);
-      faders.forEach(fader => {
-        appearOnScroll.observe(fader);
-      });
 
-      // Nav toggle for mobile
-      const navToggle = document.querySelector(".nav-toggle");
-      const navMenu = document.querySelector(".nav-menu");
-      navToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("nav-menu_visible");
-      });
+      faders.forEach(fader => appearOnScroll.observe(fader));
     });
   </script>
 </body>
